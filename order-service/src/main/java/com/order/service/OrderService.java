@@ -1,0 +1,25 @@
+package com.order.service;
+
+import com.order.model.Order;
+import com.order.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class OrderService {
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    public Order placeOrder(Order order) {
+        order.setOrderStatus("PLACED");
+        return orderRepository.save(order);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+}
+

@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: api-gateway
-
   cloud:
     gateway:
       discovery:
@@ -24,7 +23,6 @@ spring:
           uri: lb://payment-service
           predicates:
             - Path=/api/payment/**
-
 eureka:
   client:
     service-url:
@@ -35,3 +33,6 @@ management:
     web:
       exposure:
         include: "*"
+  endpoint:
+    gateway:
+      enabled: true
