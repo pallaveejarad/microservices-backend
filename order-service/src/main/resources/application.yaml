@@ -18,6 +18,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+
+  tracing:
+    sampling:
+      probability: 1.0  # 100% tracing
+
 eureka:
   client:
     service-url:
@@ -35,3 +43,14 @@ management:
     web:
       exposure:
         include: "*"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      paymentService:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        permittedNumberOfCallsInHalfOpenState: 2
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50

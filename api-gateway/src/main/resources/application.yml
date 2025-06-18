@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
       discovery:
@@ -23,6 +24,15 @@ spring:
           uri: lb://payment-service
           predicates:
             - Path=/api/payment/**
+
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+
+  tracing:
+    sampling:
+      probability: 1.0  # 100% tracing
+
 eureka:
   client:
     service-url:
