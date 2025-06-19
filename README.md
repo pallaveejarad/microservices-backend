@@ -38,19 +38,22 @@ This is a full-fledged **backend microservices system** built using the **Spring
 
 ## 🧭 Architecture
 
-```plaintext
-             [ Client / Postman ]
-                    |
-               [ API Gateway ]
-                    |
-    -------------------------------------
-    |              |                 |
-[Product]     [Order]        [Payment]
-  Service      Service         Service
-     \            |                /
-      ------------|---------------
-                   ↓
-            [ Eureka Server ]
+```mermaid
+flowchart TD
+    Client["Client / Postman"]
+    Gateway["API Gateway"]
+    Product["Product Service"]
+    Order["Order Service"]
+    Payment["Payment Service"]
+    Eureka["Eureka Server"]
+
+    Client --> Gateway
+    Gateway --> Product
+    Gateway --> Order
+    Gateway --> Payment
+    Product --> Eureka
+    Order --> Eureka
+    Payment --> Eureka
 ```
 
 ---
