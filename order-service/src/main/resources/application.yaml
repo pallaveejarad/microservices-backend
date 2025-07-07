@@ -49,8 +49,10 @@ resilience4j:
     instances:
       paymentService:
         registerHealthIndicator: true
-        slidingWindowSize: 5
-        permittedNumberOfCallsInHalfOpenState: 2
-        minimumNumberOfCalls: 5
-        waitDurationInOpenState: 10s
         failureRateThreshold: 50
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 3
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 2
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+

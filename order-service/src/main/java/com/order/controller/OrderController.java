@@ -17,7 +17,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @CircuitBreaker(name="paymentService", fallbackMethod = "paymentFallback")
     @PostMapping
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
         return new ResponseEntity<>(orderService.placeOrder(order), HttpStatus.CREATED);
@@ -28,9 +27,6 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    public ResponseEntity<String> paymentFallback(Order order, Throwable ex){
-        return ResponseEntity.ok("Payment service is down. Order placed, but payment pending.");
-    }
 
 }
 
